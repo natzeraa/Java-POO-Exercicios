@@ -6,7 +6,6 @@ public class ContaPoupanca extends Conta {
 
     @Override
     public void sacar(double valor) {
-
         if (valor <= getSaldo()) {
             setSaldo(getSaldo() - valor);
         } else{

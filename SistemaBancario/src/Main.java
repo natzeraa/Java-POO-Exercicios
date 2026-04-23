@@ -5,68 +5,74 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        ContaCorrente conta1 = new ContaCorrente(1, 1000);
-        ContaPoupanca conta2 = new ContaPoupanca(2, 1000);
+        Conta conta1 = new ContaCorrente(1, 1000);
+        Conta conta2 = new ContaPoupanca(2, 1000);
 
-        int opcaoConta;
-        int opcaoOperacao;
-        double valor;
+        int continuar = 1;
 
         System.out.println("=== SISTEMA BANCÁRIO ===");
 
-        System.out.println("Escolha a conta:");
-        System.out.println("1 - Conta Corrente");
-        System.out.println("2 - Conta Poupança");
-        opcaoConta = sc.nextInt();
+        while (continuar == 1) {
 
-        Conta contaEscolhida;
+            System.out.println("\nEscolha a conta:");
+            System.out.println("1 - Conta Corrente");
+            System.out.println("2 - Conta Poupança");
 
-        if (opcaoConta == 1) {
-            contaEscolhida = conta1;
-        } else {
-            contaEscolhida = conta2;
+            int opcaoConta = sc.nextInt();
+
+            Conta conta = (opcaoConta == 1) ? conta1 : conta2;
+
+            System.out.println("\nEscolha a operação:");
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Ver saldo");
+            System.out.println("4 - Ver rendimento");
+
+            int opcao = sc.nextInt();
+
+            double valor;
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Valor para depósito:");
+                    valor = sc.nextDouble();
+                    conta.depositar(valor);
+                    System.out.println("Saldo: R$ " + conta.getSaldo());
+                    break;
+
+                case 2:
+                    System.out.println("Valor para saque:");
+                    valor = sc.nextDouble();
+
+                    double saldoAntes = conta.getSaldo();
+                    conta.sacar(valor);
+
+                    if (conta.getSaldo() < saldoAntes) {
+                        System.out.println("Saque realizado!");
+                        System.out.println("Saldo: R$ " + conta.getSaldo());
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Saldo: R$ " + conta.getSaldo());
+                    break;
+
+                case 4:
+                    System.out.println("Rendimento: R$ " + conta.calcularRendimento());
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+
+            System.out.println("\n1 - Voltar ao menu | 2 - Finalizar");
+            continuar = sc.nextInt();
         }
 
-        System.out.println("\nEscolha a operação:");
-        System.out.println("1 - Depositar");
-        System.out.println("2 - Sacar");
-        System.out.println("3 - Ver saldo");
-        System.out.println("4 - Ver rendimento");
-
-        opcaoOperacao = sc.nextInt();
-
-        switch (opcaoOperacao) {
-            case 1:
-                System.out.println("Digite o valor para depósito:");
-                valor = sc.nextDouble();
-                contaEscolhida.depositar(valor);
-                break;
-
-            case 2:
-                System.out.println("Digite o valor para saque:");
-                valor = sc.nextDouble();
-                contaEscolhida.sacar(valor);
-                break;
-
-            case 3:
-                System.out.println("Saldo: R$ " + contaEscolhida.getSaldo());
-                break;
-
-            case 4:
-                System.out.println("Rendimento: R$ " + contaEscolhida.calcularRendimento());
-                break;
-
-            default:
-                System.out.println("Opção inválida!");
-        }
-
-        System.out.println("\n=== RESULTADO FINAL ===");
-        System.out.println("Saldo Conta Corrente: R$ " + conta1.getSaldo());
-        System.out.println("Saldo Conta Poupança: R$ " + conta2.getSaldo());
+        System.out.println("\n=== SISTEMA ENCERRADO ===");
+        System.out.println("Conta Corrente: R$ " + conta1.getSaldo());
+        System.out.println("Conta Poupança: R$ " + conta2.getSaldo());
 
         sc.close();
     }
 }
-
-
-// adicionar opção de voltar para o menu

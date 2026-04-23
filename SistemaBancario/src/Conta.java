@@ -1,10 +1,11 @@
-public abstract class Conta {
+abstract public class Conta {
     private int numero;
     private double saldo;
 
     //Construtor
     public Conta(int numero, double saldo) {
         this.numero = numero;
+        //this.saldo = saldo;
         setSaldo(saldo);
     }
 
@@ -24,7 +25,7 @@ public abstract class Conta {
 
     public void setSaldo(double saldo) {
         if (saldo < 0) {
-            System.out.println("Erro : Saldo não pode ser negativo");
+            System.out.println("Erro : saldo não pode ser negativo");
             return;
         }
         this.saldo = saldo;
@@ -39,7 +40,7 @@ public abstract class Conta {
         if (valor > 0) {
             saldo += valor;
         } else {
-            System.out.println("Erro : O valor do depósito deve ser maior que zero.");
+            System.out.println("Erro : o valor do depósito deve ser maior que zero.");
         }
     }
 }

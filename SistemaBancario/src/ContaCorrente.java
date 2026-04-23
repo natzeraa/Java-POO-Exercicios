@@ -6,7 +6,6 @@ public class ContaCorrente extends Conta {
 
     @Override
     public void sacar(double valor) {
-
         double valorTotal = valor + 2;
 
         if (valorTotal <= getSaldo()) {
